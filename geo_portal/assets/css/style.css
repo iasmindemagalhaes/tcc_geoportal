@@ -550,9 +550,22 @@ section {
   box-shadow: 0px 2px 15px rgba(18, 66, 101, 0.08);
 }
 #footer .footer-top {
-  padding: 60px 0 30px 0;
-  background: #00042C;
+  padding: 40px 0 30px 0;
+  background: url("../img/banner_pvh.jpg") top center;
+  background-size: cover;
+  position: relative;
 }
+
+#footer .footer-top::before {
+  content: "";
+  background: rgb(0, 4, 44, 0.5);
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
 #footer .footer-top .footer-contact {
   margin-bottom: 30px;
   
@@ -575,7 +588,7 @@ section {
 #footer .footer-top h4 {
   font-size: 16px;
   font-weight: bold;
-  color: #124265;
+  color: #ffffff;
   position: relative;
   padding-bottom: 12px;
 }
@@ -587,9 +600,11 @@ section {
   padding: 0;
   margin: 0;
 }
+
+
 #footer .footer-top .footer-links ul i {
   padding-right: 2px;
-  color: #2487ce;
+  color: #ffffff;
   font-size: 18px;
   line-height: 1;
 }
