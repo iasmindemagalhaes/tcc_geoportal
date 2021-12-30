@@ -2,8 +2,7 @@
 
 // Camada WFS
 
-//var wfsLayer = new L.featureGroup();
-//var newGroup = new L.featureGroup();
+var wfsLayer = new L.featureGroup();
 
 var url_geoserver = "http://localhost:8080/geoserver/wms?"
 var url_geoserver_wfs = "http://localhost:8080/geoserver/ows?"
@@ -21,63 +20,47 @@ var wmsLayer = new L.tileLayer.wms(url_geoserver,{
     attribution: "Geo Portal"
 });
 
-// Get wfs layer from geoserver
-/** 
-var wfsURL = url_geoserver_wfs + "WFS&version=1.0.0&request=GetFeature&typeName=bdgeo%3Abairro&maxFeatures=50&outputFormat=application%2Fjson";
 
-//WFS styling
-var geojsonWFSstyle = {
-    fillColor: "red",
-    fillOpacity: 0.5,
-    color: "yellow",
+//Get wfs layer from geoserver
+
+//http://localhost:8080/geoserver/bdgeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=bdgeo%3Abairro&outputFormat=application/json
+
+
+$.ajax('http://localhost:8080/geoserver/ows',{
+  type: 'GET',
+  data: {
+    service: 'WFS',
+    version: '1.0.0',
+    request: 'GetFeature',
+    typename: 'bdgeo:bairro',
+    srsname: 'EPSG:4326',
+    outputFormat: 'text/javascript',
+    },
+  dataType: 'jsonp',
+  jsonpCallback:'callback:handleJson',
+  jsonp:'format_options'
+
+ });
+ 
+  //Geojson style file
+  var myStyle = {
+    fillColor: "#ff7800",
+    color: "#000",
     weight: 1,
-    opacity: 1.0
-};
-
-async function getWFSgeojson(){
-    try{
-        const response = await fetch(wfsURL);
-        console.log(response);
-        return await response.json();
-    } catch(err){
-        console.log(err);
-    }
-}
-
-getWFSgeojson().then(data => {
-    var wfsPolylayer = L.geoJSON([data], {
-        onEachFeature: function(f,l){
-            console.log(f);
-            var customOptions = {
-                "maxWidth": "500px",
-                "className": "customPop"
-            }
-            var popupContent = "<div><b>" + f.properties.name + "</b><br />" + f.properties.zona + "</div>";
-            l.bindPopup (popupContent, customOptions);
-        },
-        style: geojsonWFSstyle
+    opacity: 1,
+    fillOpacity: 0.8,
+    attribution: "Geo Portal"
+  }
+// the ajax callback function
+function handleJson(data) {
+    selectedArea = L.geoJson(data, {
+      style: myStyle,
+      onEachFeature: function(feature, layer) {
+        layer.bindPopup(`BAIRRO: ${feature.properties.name}`+`</br>`+`ZONA: ${feature.properties.zona}`)
+      }
     }).addTo(wfsLayer);
-    map.fotBounds(wfsPolylayer.getBounds());
-})
-
-//Get JSON using JQuery
-
-$.getJSON(wfsURL, function(geojsonData){
-    var geojsonLayer = new L.geoJSON(geojsonData, {
-        style: function(feature){
-            return{
-                "weight": 0,
-                "fillColor": "yellow",
-                "fillOpacity": 0.5
-            }
-        }
-    }).addTo(newGroup);
-});
-*/
-
-//GEOSERVER WFS font: https://dev.to/iamtekson/wfs-request-in-geoserver-using-leafletjs-552g
-
-
+  map.fitBounds(selectedArea.getBounds());
+}
 
 //atributos  do mapa
 
@@ -99,6 +82,8 @@ var map = L.map("map", {
     layers: [cartodb]
 })
 
+
+
 //web services layers
 
 var baseLayers = {
@@ -110,11 +95,13 @@ var baseLayers = {
 
 var overlayMaps = {
     "Bairros (WMS)": wmsLayer,
-    //"Bairros (WFS)": wfsLayer,
-    //"Bairros (GeoJSON)": newGroup
-
+    "Bairros GeoJson":wfsLayer
 };
 
 //Add base layers
 
 var controlLayers = L.control.layers(baseLayers, overlayMaps, {collapsed:false}).addTo(map);
+
+//Add scale
+
+L.control.scale({metric:true, imperial:false, maxWidth:100}).addTo(map);

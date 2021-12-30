@@ -4,7 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Modelo - Geo Portal</title>
+    <title>Geo Portal</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+  
+    <!-- Favicons -->
+    <link href="/geo_portal/assets/img/favicon-32x32.png" rel="icon">
+    <link href="/geo_portal/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!--Leaflet CSS-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
@@ -18,28 +24,28 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <!--Custom CSS-->
-    <link rel="stylesheet" href="/geo_portal/stylemap.css">
+    <link rel="stylesheet" href="/geo_portal/assets/css/stylemap.css">
 </head>
 <body>
-    <section id="nav-bar">
-        <nav class ="navbar navbar-expand-lg navbar-dark bg-secondary">
-            <a class="navbar-brand" href="#">Geo Portal</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon">            
-                </span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a href="#" class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">Sobre</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </section>
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center justify-content-between">
+
+        <h1 class="logo"><a href="/geo_portal/index.html">Geo Portal</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+        <nav id="navbar" class="navbar">
+            <ul>
+            <li><a class="nav-link scrollto active" href="/geo_portal/index.html">Início</a></li>
+            <li><a class="getstarted scrollto" href="/geo_portal/mapas_municipais.html">Mapas Municipais</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+
+        </div>
+    </header><!-- End Header -->
+    
     <section class="container-fluid">
         <div class="row">
             <div class="col-lg-3 left-sidebar">
@@ -55,10 +61,67 @@
                 </div>
             </div>
             <div class="col-lg-9" id="map">
-                Mapa
+                Ambiente do Mapa
             </div>
         </div>
     </section>
+
+      <!-- ======= Footer ======= -->
+    <footer id="footer">
+
+            <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                <div class="col-lg-3 col-md-6 footer-contact">
+                    <h3>Geo Portal</h3>
+                    <p>
+                    Av. Abunã, 2625 - Liberdade<br>
+                    CEP 76.803-889<br>
+                    Porto Velho - RO<br><br>
+                    <strong>Telefone:</strong> (69) 3901-3004<br>
+                    <strong>E-mail:</strong> dpge.sempog@portovelho.ro.gov.br<br>
+                    </p>
+                </div>
+
+                <div class="col-lg-2 col-md-6 footer-links">
+                    <h4>Tecnologias</h4>
+                    <ul>
+                    <ul>
+                        <li><i class="ri-check-double-line"></i>Javascript</li>
+                        <li><i class="ri-check-double-line"></i>Leaflet</li>
+                        <li><i class="ri-check-double-line"></i>PostgreSQL</li>
+                    </ul>
+                    </ul>
+                </div>
+
+                <div class="col-lg-2 col-md-6 footer-links">
+                    <h4><br></h4>
+                    <ul>
+                    <ul>
+                        <li><i class="ri-check-double-line"></i>Geoserver</li>
+                        <li><i class="ri-check-double-line"></i>Geonetwork</li>
+                        <li><i class="ri-check-double-line"></i>Java</li>
+                    </ul>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-6 footer-newsletter">
+                    <h4><br></h4>
+                    <p class="txt-justificado">Plataforma desenvolvida pela discente Iasmin de Magalhães Oliveira Lopes, do curso de 
+                    Análise e Desenvolvimento de Sistemas do Instituto Federal de Ciência e Tecnologia de Rondônia - IFRO, 
+                    Campus Calama, como requisito avaliativo do Trabalho Final de Graduação. O objetivo da plataforma é dar 
+                    acesso e uso através de um portal web dos dados geográficos produzidos pela Prefeitura do Município de
+                    Porto Velho, possibilitando aos cidadãos maior conhecimento de informações do Território.
+                    </p>
+                </div>
+
+                </div>
+            </div>
+            </div>
+
+
+    </footer><!-- End Footer -->
 
     <!--JQuery-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
