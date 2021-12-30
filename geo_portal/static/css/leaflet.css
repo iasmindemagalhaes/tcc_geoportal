@@ -121,6 +121,7 @@
 
 .leaflet-control {
 	position: relative;
+	top: 70px;
 	z-index: 800;
 	pointer-events: visiblePainted; /* IE 9-10 doesn't have auto */
 	pointer-events: auto;
@@ -367,6 +368,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 .leaflet-control-layers-expanded .leaflet-control-layers-list {
 	display: block;
 	position: relative;
+	
 	}
 .leaflet-control-layers-expanded {
 	padding: 6px 10px 6px 6px;
@@ -382,6 +384,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 	margin-top: 2px;
 	position: relative;
 	top: 1px;
+	
 	}
 .leaflet-control-layers label {
 	display: block;
