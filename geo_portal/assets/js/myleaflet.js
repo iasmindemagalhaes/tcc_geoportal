@@ -7,7 +7,6 @@ var wfsLayer = new L.featureGroup();
 var url_geoserver = "http://localhost:8080/geoserver/wms?"
 var url_geoserver_wfs = "http://localhost:8080/geoserver/ows?"
 
-
 // Get wms layer from geoserver
 
 var wmsLayer = new L.tileLayer.wms(url_geoserver,{
@@ -82,11 +81,10 @@ var map = L.map("map", {
     layers: [cartodb]
 })
 
-
-
 //web services layers
 
 var baseLayers = {
+    
     "Openstreet Map": osm,
     "CartoDB Light": cartodb
 };
@@ -105,3 +103,25 @@ var controlLayers = L.control.layers(baseLayers, overlayMaps, {collapsed:false})
 //Add scale
 
 L.control.scale({metric:true, imperial:false, maxWidth:100}).addTo(map);
+
+//Function to search keyword from WFS service
+
+function searchWFS(){
+  //Get value from inputbox
+  queryBox = document.getElementById("search-value").value;
+
+  if(!queryBox){
+    alert("Por favor, insira um valor válido!");
+    return false;
+  }
+
+  var cqlFilter = "cql_filter=%27name=%20OLARIA%20%27";
+  var url = "http://localhost:8080/geoserver/bdgeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=bdgeo%3Abairro&outputFormat=application/json&" + cqlFilter;
+  
+};
+
+//Function to clear results
+
+function clearResult(){
+  document.getElementById("search-value").value = "";
+};
