@@ -1,15 +1,21 @@
 <?php
 
-$pdo = new PDO('pgsql:host=localhost;dbname=bdgeo;port=5432;charset=utf8','postgresql','1504');
 
-$sql = "select name, poptotal from base.bairro;";
+try {
+    $pdo = new PDO("pgsql:host=localhost;dbname='bdgeo';port='5432';charset='utf8'",'postgresql','1504');
 
-$statement = $pdo->prepare($sql);
+    $sql = "select name, poptotal from base.bairro;";
 
-$statement->execute();
+    $statement = $pdo->prepare($sql);
 
-while($results = $statement->fetch(PDO::FETCH_ASSOC)){
-    $result[] = $results;
+    $statement->execute();
+
+    while($results = $statement->fetch(PDO::FETCH_ASSOC)){
+        $result[] = $results;
+    }
+
+    echo json_encode($result);
+
+} catch(Exception $e) {
+   echo $e->getMessage();
 }
-
-echo json_encode($result);
