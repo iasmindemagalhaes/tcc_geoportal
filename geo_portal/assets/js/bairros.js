@@ -4,7 +4,6 @@
 
 var wfsLayer = new L.featureGroup();
 
-
 $.ajax('http://localhost:8080/geoserver/ows?',{
   type: 'GET',
   data: {
@@ -19,8 +18,7 @@ $.ajax('http://localhost:8080/geoserver/ows?',{
   jsonpCallback:'callback:handleJson',
   jsonp:'format_options'
  });
- 
-  
+
   //Geojson style file
   var myStyle = {
     fillColor: "#E0A890",
@@ -38,16 +36,17 @@ function handleJson(data) {
       style: myStyle,
       onEachFeature: function(feature, layer) {
         //layer.bindPopup(`Bairro: ${feature.properties.name}`);
-        layer.bindTooltip(`Bairro ${feature.properties.name}`,{
+        layer.bindTooltip(`Bairro ${feature.properties.name}`+`</br>`+`ZONA: ${feature.properties.zona}`,{
           direction: 'top',
           permanent: false,
           sticky: true,
           offset: [10, 0],
           opacity: 1,
-        
+ 
         });
-      }
+      },
       
+    
     }).addTo(wfsLayer);
   map.fitBounds(selectedArea.getBounds());
 }
@@ -86,7 +85,7 @@ var baseLayers = {
 //Overlay layer
 
 var overlayMaps = {
-    "Bairros Distrito Sede":wfsLayer
+    "Bairros Distrito Sede":wfsLayer,
 };
 
 //Add base layers

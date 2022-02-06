@@ -20,6 +20,7 @@ var wmsLayer = new L.tileLayer.wms(url_geoserver,{
 });
 
 
+
 //Get wfs layer from geoserver
 
 //http://localhost:8080/geoserver/bdgeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=bdgeo%3Abairro&outputFormat=application/json
