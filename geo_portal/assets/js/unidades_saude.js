@@ -106,7 +106,7 @@ var url_geoserver = "http://localhost:8080/geoserver/wms?"
 // Get wms layer from geoserver
 
 var wmsLayer = new L.tileLayer.betterWms(url_geoserver,{
-  layers: 'bdgeo:localidade_pvh',
+  layers: 'bdgeo:unidade_de_saude',
   transparency: 'true',
   format: 'image/svg',
   opacity: 1, 
@@ -115,17 +115,13 @@ var wmsLayer = new L.tileLayer.betterWms(url_geoserver,{
 });
 
 var wmsLayer2 = new L.tileLayer.betterWms(url_geoserver,{
-    layers: 'bdgeo:limite_distrito',
-    transparency: 'true',
-    format: 'image/svg',
-    opacity: 0.6, 
-    maxZoom: 20,
-    attribution: "Geo Portal"
+  layers: 'bdgeo:limite_distrito',
+  transparency: 'true',
+  format: 'image/svg',
+  opacity: 0.6, 
+  maxZoom: 20,
+  attribution: "Geo Portal"
 });
-
-
-
-
 
 
 //"http://localhost:8080/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=bdgeo:limite_distrito",()
@@ -151,39 +147,6 @@ $.ajax('http://localhost:8080/geoserver/ows?',{
   jsonp:'format_options'
  });
 
-  //Geojson style file
-  var myStyle = {
-    fillColor: "#E0A890",
-    color: "#000",
-    weight: 1,
-    opacity: 1,
-    fillOpacity: 0.4,
-    attribution: "Geo Portal"
-  }
-
-  
-
-  
-// the ajax callback function
-function handleJson(data) {
-    selectedArea = L.geoJson(data, {
-      style: myStyle,
-      onEachFeature: function(feature, layer) {
-        layer.bindTooltip(`<strong>${feature.properties.nome}</strong>`+`</br>`+`${feature.properties.leicriacao}`,{
-          direction: 'top',
-          permanent: false,
-          sticky: true,
-          offset: [10, 0],
-          opacity: 1,
-        
-        });
-        
-      },
-    
-    
-    }).addTo(wfsLayer);
-  map.fitBounds(selectedArea.getBounds());
-}
 
 //atributos  do mapa
 
@@ -204,9 +167,9 @@ var positron = L.tileLayer(positronURL, {attribution:mAttr});
 
 var map = L.map("map", {
     center: [-8.769659, -63.882688],
-    zoom: 12,
+    zoom: 8,
     minZoom: 3,
-    layers: [osm, wfsLayer, wmsLayer, wmsLayer2]
+    layers: [osm, wmsLayer, wmsLayer2]
 })
 
 
@@ -223,9 +186,8 @@ var baseLayers = {
 //Overlay layer
 
 var overlayMaps = {
-    "Distritos":wfsLayer,
     "Limites Distritos": wmsLayer2,
-    "Localidades": wmsLayer
+    "Unidades de Saúde": wmsLayer
 };
 
 //Add base layers
@@ -351,7 +313,7 @@ L.Geoserver = L.FeatureGroup.extend({
     legend.onAdd = function (map) {
       var div = L.DomUtil.create("div", "info Legend");
       //var url = `${that.baseLayerUrl}/wms?REQUEST=GetLegendGraphic&VERSION=1.1.0&FORMAT=image/png&LAYER=${that.options.layers}&style=${that.options.style}`;
-      var url = "http://localhost:8080/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=bdgeo:limite_distrito";
+      var url = "http://localhost:8080/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=bdgeo%3Aunidade_de_saude";
       div.innerHTML +=
         "<img src=" +
         url +
