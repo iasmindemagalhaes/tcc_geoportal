@@ -486,6 +486,15 @@ h1, h2, h3, h4, h5, h6 {
 #hero .icon-box-2:hover .title a {
   color: #2487ce;
 }
+
+#descricao{
+  background-color: rgba(61, 61, 61, 0.397);
+  padding: 10px;
+  color: white;
+}
+
+
+
 @media (min-width: 1024px) {
   #hero {
     background-attachment: fixed;
