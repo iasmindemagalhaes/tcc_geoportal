@@ -139,12 +139,12 @@ var wfsLayer = new L.featureGroup();
 $.ajax('http://localhost:8080/geoserver/ows?',{
   type: 'GET',
   data: {
-    service: 'WFS',
-    version: '1.0.0',
-    request: 'GetFeature',
-    typename: 'bdgeo:distritos_pvh',
+    service: 'WFS', //serviço Web Feature Service (WFS)
+    version: '1.0.0', //versão dada pelo Geoserver
+    request: 'GetFeature', //Retorna uma seleção de recursos de uma fonte de dados, incluindo geometria e valores de atributo
+    typename: 'bdgeo:distritos_pvh', //nome da camada no Geoserver
     srsname: 'EPSG:4326',
-    outputFormat: 'text/javascript',
+    outputFormat: 'text/javascript', //formato de saída
     },
   dataType: 'jsonp',
   jsonpCallback:'callback:handleJson',
@@ -160,10 +160,7 @@ $.ajax('http://localhost:8080/geoserver/ows?',{
     fillOpacity: 0.4,
     attribution: "Geo Portal"
   }
-
-  
-
-  
+ 
 // the ajax callback function
 function handleJson(data) {
     selectedArea = L.geoJson(data, {
@@ -175,12 +172,8 @@ function handleJson(data) {
           sticky: true,
           offset: [10, 0],
           opacity: 1,
-        
-        });
-        
+        }); 
       },
-    
-    
     }).addTo(wfsLayer);
   map.fitBounds(selectedArea.getBounds());
 }
